@@ -40,7 +40,7 @@ namespace MVC1.Controllers
             ViewBag.UserMessage = $"Hello from the User_{number}";
             ViewBag.MyList = myList;
 
-            return View();
+            return RedirectToAction("Contact");
 
         }
     }
