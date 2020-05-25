@@ -1,4 +1,5 @@
 ﻿using Microsoft.Ajax.Utilities;
+using MVC1.Exceptions;
 using MVC1.Models;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,7 @@ namespace MVC1.Controllers
             //Returns to index if studentId not found
             try
             {
-                Student foundStudent = GetStudentById(id) ?? throw new Exception();
+                Student foundStudent = GetStudentById(id) ?? throw new StudentNotFoundException($"Student with the provided Id:{id}, does not exist");
                 return View(foundStudent);
             }
             catch
@@ -79,7 +80,7 @@ namespace MVC1.Controllers
             {
                 // TODO: Add update logic here
 
-                Student foundStudent = GetStudentById(id) ?? throw new Exception();
+                Student foundStudent = GetStudentById(id) ?? throw new StudentNotFoundException($"Student with the provided Id:{id}, does not exist");
 
                 //Update Name
                 foundStudent.StudentName = collection["StudentName"];
@@ -107,7 +108,7 @@ namespace MVC1.Controllers
         {
             try
             {
-                Student foundStudent = GetStudentById(id) ?? throw new Exception();
+                Student foundStudent = GetStudentById(id) ?? throw new StudentNotFoundException($"Student with the provided Id:{id}, does not exist");
                 MvcApplication.studentsList.Remove(foundStudent);
                 return RedirectToAction("Index");
             }
